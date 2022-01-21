@@ -8,8 +8,7 @@ class Site:
 
     def create_dir(self, path):
         # Find root directory
-        p = Path(path)
-        directory = self.dest / p.relative_to(self.source)
+        directory = self.dest / path.relative_to(self.source)
 
         # Make a directory
         directory.mkdir(parents=True, exist_ok=True)
@@ -21,4 +20,4 @@ class Site:
         # Recreate all paths
         for path in self.source.rglob("*"):
             if path.is_dir():
-                self.create_dir(self, path)
+                self.create_dir(path)
