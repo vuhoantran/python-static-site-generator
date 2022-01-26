@@ -3,14 +3,14 @@ from typing import List
 import shutil
 
 class Parser():
-    extensions = List[str]
+    extensions: List[str] = []
 
     # Validate Extensions
     def valid_extension(self, extension):
          if extension in self.extensions:
             return True
          else:
-             return False
+            return False
 
     # Base parse() method
     def parse(self, path, source, dest):
@@ -37,6 +37,7 @@ class Parser():
 # ResourceParser subclass
 class ResourceParser(Parser):
     extensions = [".jpg", ".png", ".gif", ".css", ".html"]
+
     def parse(self, path, source, dest):
         self.copy(path, source, dest)
 
