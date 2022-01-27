@@ -10,10 +10,7 @@ class Parser():
         return extension in self.extensions
 
     # Base parse() method
-    def parse(self, path, source, dest):
-        self.path = Path(str(path))
-        self.source = Path(str(source))
-        self.dest = Path(str(dest))
+    def parse(self, path: Path, source: Path, dest: Path):
         raise NotImplementedError
 
     # Parser read() method
@@ -23,13 +20,13 @@ class Parser():
 
     # Parser write() method
     def write(self, path, dest, content, ext=".html"):
-        full_path = self.dest / path.with_suffix(ext).name
+        full_path = dest / path.with_suffix(ext).name
         with open(full_path, 'w') as file:
             file.write(content)
 
     # Parser copy() method
     def copy(self, path, source, dest):
-        shutil.copy2(path, dest / path.relativeto(source))
+        shutil.copy2(path, dest / path.relative_to(source))
 
 # ResourceParser subclass
 class ResourceParser(Parser):
