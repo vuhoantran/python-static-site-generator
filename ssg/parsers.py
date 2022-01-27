@@ -7,10 +7,7 @@ class Parser():
 
     # Validate Extensions
     def valid_extension(self, extension):
-         if extension in self.extensions:
-            return True
-         else:
-            return False
+        return extension in self.extensions
 
     # Base parse() method
     def parse(self, path, source, dest):
