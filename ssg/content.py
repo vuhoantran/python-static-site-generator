@@ -13,7 +13,8 @@ class Content(Mapping):
     def load(cls, string):
         _, fm, content = cls.__regex.split(string, 2)
         cls.load(fm, Loader=FullLoader)
-        return cls(cls.metadata, content)
+        metadata = []
+        return cls(metadata, content)
 
     # Content constructor
     def __init__(self, metadata, content):
@@ -52,9 +53,10 @@ class Content(Mapping):
         data = {}
         # Removing content from the representation
         for i in self.data.items():
-            key = i
+            key = i.keys()
+            value = i.values()
             if key != "content":
-                data[key] = self.data[key]
+                data[key] = value
         return str(data)
 
 
