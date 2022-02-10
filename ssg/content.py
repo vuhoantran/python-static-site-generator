@@ -9,10 +9,11 @@ class Content(Mapping):
     __regex = re.compile(__delimiter, re.MULTILINE)
 
     # Load class method
-    def load(self, cls, string):
-        _, fm, content = self.__regex.split(string, 2)
-        self.load(fm, Loader=FullLoader)
-        return cls(metadata, content)
+    @classmethod
+    def load(cls, string):
+        _, fm, content = cls.__regex.split(string, 2)
+        cls.load(fm, Loader=FullLoader)
+        return cls(cls.metadata, content)
 
     # Content constructor
     def __init__(self, metadata, content):
@@ -25,8 +26,9 @@ class Content(Mapping):
         return self.data["content"]
 
     # Type property
+    @property
     def type(self):
-        return self.data["type"] if "type" in self.data.keys() else None
+        return self.data["type"] if "type" in self.data else None
 
     # Type setter
     @type.setter
