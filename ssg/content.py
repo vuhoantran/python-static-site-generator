@@ -4,8 +4,9 @@ from collections.abc import Mapping
 
 # Content class
 class Content(Mapping):
-    __delimeter = "^(?:-|\+){3}\s*$"
-    __regex = re.compile(__delimeter, re.MULTILINE)
+    # r for raw string
+    __delimiter = r"^(?:-|\+){3}\s*$"
+    __regex = re.compile(__delimiter, re.MULTILINE)
 
     # Load class method
     def load(self, cls, string):
@@ -20,6 +21,10 @@ class Content(Mapping):
 
     # Body property
     @property
+    def body(self):
+        return self.data["content"]
+
+    # Type property
     def type(self):
         return self.data["type"] if "type" in self.data.keys() else None
 
@@ -45,9 +50,9 @@ class Content(Mapping):
         data = {}
         # Removing content from the representation
         for i in self.data.items():
-            self.key = i
-            if i != "content":
-                self.value = self.data[key]
+            key = i
+            if key != "content":
+                data[key] = self.data[key]
         return str(data)
 
 
