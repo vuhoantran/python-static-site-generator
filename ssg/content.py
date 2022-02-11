@@ -1,4 +1,6 @@
 import re
+
+import yaml
 from yaml import load, FullLoader
 from collections.abc import Mapping
 
@@ -12,8 +14,7 @@ class Content(Mapping):
     @classmethod
     def load(cls, string):
         _, fm, content = cls.__regex.split(string, 2)
-        cls.load(fm, Loader=FullLoader)
-        metadata = []
+        metadata = load(fm, Loader=FullLoader)
         return cls(metadata, content)
 
     # Content constructor
@@ -52,9 +53,7 @@ class Content(Mapping):
     def __repr__(self):
         data = {}
         # Removing content from the representation
-        for i in self.data.items():
-            key = i.keys()
-            value = i.values()
+        for key, value in self.data.items():
             if key != "content":
                 data[key] = value
         return str(data)
