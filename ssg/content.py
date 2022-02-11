@@ -14,7 +14,7 @@ class Content(Mapping):
     @classmethod
     def load(cls, string):
         _, fm, content = cls.__regex.split(string, 2)
-        metadata = load(fm, Loader=FullLoader)
+        load(fm, Loader=FullLoader)
         return cls(metadata, content)
 
     # Content constructor
@@ -43,8 +43,7 @@ class Content(Mapping):
 
     # Custom iterator method
     def __iter__(self):
-        iterator = iter(self.data)
-        next(iterator)
+        return iter(self.data)
 
     # Custom length method
     def __len__(self):
