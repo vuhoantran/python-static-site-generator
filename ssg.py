@@ -8,7 +8,10 @@ def main(source="content", dest="dist"):
         "source": source,
         "dest": dest,
         # Parser configuration
-        "parsers": [ssg.parsers.ResourceParser()]
+        # Add available parsers
+        "parsers": [ssg.parsers.ResourceParser(),
+                    ssg.parsers.MarkdownParser(),
+                    ssg.parsers.ReStructuredTextParser()]
     }
 
     # Build the site
