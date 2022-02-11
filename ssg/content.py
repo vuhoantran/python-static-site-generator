@@ -43,7 +43,7 @@ class Content(Mapping):
 
     # Custom iterator method
     def __iter__(self):
-        return iter(self.data)
+        self.data.__iter__()
 
     # Custom length method
     def __len__(self):
